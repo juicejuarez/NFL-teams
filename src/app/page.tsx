@@ -3,11 +3,15 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-export default function Home() {
-  const [afcOpen, setAfcOpen] = useState(false);
-  const [nfcOpen, setNfcOpen] = useState(false);
+interface TeamProps {
+  [division: string]: string[];
+}
 
-  const afcTeams = {
+export default function Home() {
+  const [afcOpen, setAfcOpen] = useState<boolean>(false);
+  const [nfcOpen, setNfcOpen] = useState<boolean>(false);
+
+  const afcTeams: TeamProps = {
     "North": [
       "Baltimore Ravens",
       "Cincinnati Bengals",
@@ -34,7 +38,7 @@ export default function Home() {
     ]
   };
 
-  const nfcTeams = {
+  const nfcTeams: TeamProps = {
     "North": [
       "Chicago Bears",
       "Detroit Lions",
@@ -61,7 +65,7 @@ export default function Home() {
     ]
   };
 
-  const renderTeamsList = (conference: string, divisions: Record<string, string[]>) => {
+  const renderTeamsList = (conference: string, divisions: TeamProps) => {
     return Object.entries(divisions).map(([division, teams]) => (
       <div key={division} className="mb-4">
         <h3 className="text-lg font-semibold text-gray-300 mb-2">{conference} {division}</h3>
